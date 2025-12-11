@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CIPAAAAAA FAV PERSON</title>
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#0a0909;
+      font-family:Arial;
+      overflow:hidden;
+    }
+    .card{
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  text-align:center;
+  width:330px;
+  box-shadow:
+     0 0 20px rgba(0, 140, 255, 0.6),     /* glow luar biru */
+     0 0 40px rgba(0, 140, 255, 0.4),     /* glow melebar */
+     0 0 60px rgba(0, 140, 255, 0.2);     /* glow diffuse */
+  animation:fadeIn 1s ease;
+  position:relative;
+  z-index:10; /* agar tidak ketutup bintang */
+}
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(20px);} 
+      to{opacity:1;transform:translateY(0);}
+    }
+    .hidden{display:none;}
+    #photo{
+      width:100%;
+      border-radius:14px;
+      margin-top:15px;
+      animation:zoomIn 1s ease;
+    }
+    @keyframes zoomIn{
+      from{opacity:0;transform:scale(.7);} 
+      to{opacity:1;transform:scale(1);}    
+    }
+
+    button{
+      padding:10px 20px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:bold;
+      margin:10px;
+    }
+    .yes{background:#ff6b6b;color:white;}
+    .no{background:#ccc;color:#333;position:relative;}
+
+    .love {
+  position: fixed;
+  top: -20px;
+  font-size: 24px;
+  animation: fall 2s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(120vh) scale(1.8); opacity: 0; }
+}
+/* Slideshow container */
+.slider {
+  width: 100%;
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  margin-top: 15px;
+}
+
+/* Semua foto */
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.slide-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.music-btn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 18px;
+  background: rgba(0,140,255,0.3);
+  border: 2px solid rgba(0,140,255,0.6);
+  border-radius: 14px;
+  color: white;
+  font-weight:bold;
+  cursor:pointer;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 12px rgba(0,140,255,0.6);
+  transition: 0.3s;
+}
+
+.music-btn:hover{
+  background: rgba(0,140,255,0.5);
+  box-shadow: 0 0 18px rgba(0,140,255,0.9);
+}
+
+  </style>
+</head>
+<body> 
+<button id="musicBtn" class="music-btn">Putar Lagu 🎵</button>
+
+<div class="card" id="step1">
+  <h2>Haii Cipaa Good Morning</h2>
+  <p>Ini waktu yang tepat...</p>
+  <p>kenapa waktu yang tepat? karena hari ini 12.12 hehe,maap ngejokes dikit. Jadi yang intinya.....</p>
+  <p>Eitsss  Sebelum lanjut sabi kali yee klik musik<p></p>
+  <button onclick="next()">Lanjut</button>
+</div>
+
+<div class="card hidden" id="step2">
+  <h1>Singkat Padat</h1>
+  <h2>Will you be my girlfriend?</h2>
+  <div class="slider">
+  <img class="slide-img slide-active" src="foto1.jpg" />
+  <img class="slide-img" src="foto2.jpg" />
+  <img class="slide-img" src="foto3.jpg" />
+  <img class="slide-img" src="foto4.jpg" />
+</div>
+
+  <div>
+    <button class="yes" onclick="accept()">YES</button>
+    <button class="no" id="noBtn">NO</button>
+  </div>
+</div>
+
+<div class="card hidden" id="step3">
+  <h2>Yuhuuuuuuuuu 💖</h2>
+  <p>Anjayeeee Love youuu cipaaaaaaa</p>
+  <p>Balasnya di wa nahhh!!!!</p>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+function next(){
+  document.getElementById("step1").classList.add("hidden");
+  document.getElementById("step2").classList.remove("hidden");
+}
+
+function accept(){
+  document.getElementById("step2").classList.add("hidden");
+  document.getElementById("step3").classList.remove("hidden");
+
+  startLoveRain();
+}
+function startLoveRain(){
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("love");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 2000);
+  }, 200);
+}
+
+
+window.next = next;
+window.accept = accept;
+
+// tombol NO kabur
+const noBtn = document.getElementById("noBtn");
+if(noBtn){
+  noBtn.addEventListener("mouseover",()=>{
+    const x = Math.random()*200 - 100;
+    const y = Math.random()*200 - 100;
+    noBtn.style.transform = `translate(${x}px,${y}px)`;
+  });
+}
+
+});
+// SLIDESHOW 4 FOTO
+const slides = document.querySelectorAll(".slide-img");
+let index = 0;
+
+setInterval(() => {
+  slides[index].classList.remove("slide-active");
+  index = (index + 1) % slides.length;
+  slides[index].classList.add("slide-active");
+}, 2500);
+document.addEventListener("DOMContentLoaded", function(){
+
+  const musicBtn = document.getElementById("musicBtn");
+  const bgm = document.getElementById("bgm");
+  let isPlaying = false;
+
+  musicBtn.addEventListener("click", () => {
+    if (!isPlaying){
+      bgm.play();
+      isPlaying = true;
+      musicBtn.textContent = "Pause Lagu ⏸️";
+    } else {
+      bgm.pause();
+      isPlaying = false;
+      musicBtn.textContent = "Putar Lagu 🎵";
+    }
+  });
+
+});
+</script>
+
+<!-- Musik -->
+<audio id="bgm" src="akad.mp3" autoplay loop></audio>
+
+
+</body>
+</html>
